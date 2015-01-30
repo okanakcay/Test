@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AkilliBaretCmsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="AkilliBaretCmsModelStoreContainer">
+          <EntitySet Name="Application" EntityType="AkilliBaretCmsModel.Store.Application" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Authorization" EntityType="AkilliBaretCmsModel.Store.Authorization" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="City" EntityType="AkilliBaretCmsModel.Store.City" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Connection" EntityType="AkilliBaretCmsModel.Store.Connection" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customer" EntityType="AkilliBaretCmsModel.Store.Customer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Login" EntityType="AkilliBaretCmsModel.Store.Login" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="AkilliBaretCmsModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Authorization_User" Association="AkilliBaretCmsModel.Store.FK_Authorization_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Authorization" EntitySet="Authorization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Connection_Customer" Association="AkilliBaretCmsModel.Store.FK_Connection_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Connection" EntitySet="Connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_City" Association="AkilliBaretCmsModel.Store.FK_Customer_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Application" Association="AkilliBaretCmsModel.Store.FK_Login_Application">
+            <End Role="Application" EntitySet="Application" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_User" Association="AkilliBaretCmsModel.Store.FK_Login_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Connection" Association="AkilliBaretCmsModel.Store.FK_User_Connection">
+            <End Role="Connection" EntitySet="Connection" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Customer" Association="AkilliBaretCmsModel.Store.FK_User_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Authorization">
+          <Key>
+            <PropertyRef Name="AuthorizationId" />
+          </Key>
+          <Property Name="AuthorizationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="NewUser" Type="bit" />
+          <Property Name="UpdateUser" Type="bit" />
+          <Property Name="DeleteUser" Type="bit" />
+          <Property Name="NewBaret" Type="bit" />
+          <Property Name="UpdateBaret" Type="bit" />
+          <Property Name="DeleteBaret" Type="bit" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Connection">
+          <Key>
+            <PropertyRef Name="ConnectionId" />
+          </Key>
+          <Property Name="ConnectionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="ServerName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Catalog" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="Address" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Name="LoginId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="ApplicationId" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="ConnectionId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Authorization_User">
+          <End Role="User" Type="AkilliBaretCmsModel.Store.User" Multiplicity="0..1" />
+          <End Role="Authorization" Type="AkilliBaretCmsModel.Store.Authorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Authorization">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Connection_Customer">
+          <End Role="Customer" Type="AkilliBaretCmsModel.Store.Customer" Multiplicity="0..1" />
+          <End Role="Connection" Type="AkilliBaretCmsModel.Store.Connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Connection">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_City">
+          <End Role="City" Type="AkilliBaretCmsModel.Store.City" Multiplicity="0..1" />
+          <End Role="Customer" Type="AkilliBaretCmsModel.Store.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Application">
+          <End Role="Application" Type="AkilliBaretCmsModel.Store.Application" Multiplicity="0..1" />
+          <End Role="Login" Type="AkilliBaretCmsModel.Store.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_User">
+          <End Role="User" Type="AkilliBaretCmsModel.Store.User" Multiplicity="0..1" />
+          <End Role="Login" Type="AkilliBaretCmsModel.Store.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Connection">
+          <End Role="Connection" Type="AkilliBaretCmsModel.Store.Connection" Multiplicity="0..1" />
+          <End Role="User" Type="AkilliBaretCmsModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Connection">
+              <PropertyRef Name="ConnectionId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ConnectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Customer">
+          <End Role="Customer" Type="AkilliBaretCmsModel.Store.Customer" Multiplicity="0..1" />
+          <End Role="User" Type="AkilliBaretCmsModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AkilliBaretCmsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AkilliBaretCmsEntities" p1:LazyLoadingEnabled="true" >
+          <EntitySet Name="Application" EntityType="AkilliBaretCmsModel.Application" />
+          <EntitySet Name="Authorization" EntityType="AkilliBaretCmsModel.Authorization" />
+          <EntitySet Name="City" EntityType="AkilliBaretCmsModel.City" />
+          <EntitySet Name="Connection" EntityType="AkilliBaretCmsModel.Connection" />
+          <EntitySet Name="Customer" EntityType="AkilliBaretCmsModel.Customer" />
+          <EntitySet Name="Login" EntityType="AkilliBaretCmsModel.Login" />
+          <EntitySet Name="User" EntityType="AkilliBaretCmsModel.User" />
+          <AssociationSet Name="FK_Login_Application" Association="AkilliBaretCmsModel.FK_Login_Application">
+            <End Role="Application" EntitySet="Application" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Authorization_User" Association="AkilliBaretCmsModel.FK_Authorization_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Authorization" EntitySet="Authorization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_City" Association="AkilliBaretCmsModel.FK_Customer_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Connection_Customer" Association="AkilliBaretCmsModel.FK_Connection_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Connection" EntitySet="Connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Connection" Association="AkilliBaretCmsModel.FK_User_Connection">
+            <End Role="Connection" EntitySet="Connection" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Customer" Association="AkilliBaretCmsModel.FK_User_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_User" Association="AkilliBaretCmsModel.FK_Login_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Type="Int32" Name="ApplicationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Login" Relationship="AkilliBaretCmsModel.FK_Login_Application" FromRole="Application" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="Authorization">
+          <Key>
+            <PropertyRef Name="AuthorizationId" />
+          </Key>
+          <Property Type="Int32" Name="AuthorizationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" />
+          <Property Type="Boolean" Name="NewUser" />
+          <Property Type="Boolean" Name="UpdateUser" />
+          <Property Type="Boolean" Name="DeleteUser" />
+          <Property Type="Boolean" Name="NewBaret" />
+          <Property Type="Boolean" Name="UpdateBaret" />
+          <Property Type="Boolean" Name="DeleteBaret" />
+          <NavigationProperty Name="User" Relationship="AkilliBaretCmsModel.FK_Authorization_User" FromRole="Authorization" ToRole="User" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Type="Int32" Name="CityId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="AkilliBaretCmsModel.FK_Customer_City" FromRole="City" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Connection">
+          <Key>
+            <PropertyRef Name="ConnectionId" />
+          </Key>
+          <Property Type="Int32" Name="ConnectionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CustomerId" />
+          <Property Type="String" Name="ServerName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Catalog" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="AkilliBaretCmsModel.FK_Connection_Customer" FromRole="Connection" ToRole="Customer" />
+          <NavigationProperty Name="User" Relationship="AkilliBaretCmsModel.FK_User_Connection" FromRole="Connection" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Type="Int32" Name="CustomerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Fax" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CityId" />
+          <Property Type="String" Name="Address" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="City" Relationship="AkilliBaretCmsModel.FK_Customer_City" FromRole="Customer" ToRole="City" />
+          <NavigationProperty Name="Connection" Relationship="AkilliBaretCmsModel.FK_Connection_Customer" FromRole="Customer" ToRole="Connection" />
+          <NavigationProperty Name="User" Relationship="AkilliBaretCmsModel.FK_User_Customer" FromRole="Customer" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginId" />
+          </Key>
+          <Property Type="Int32" Name="LoginId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" />
+          <Property Type="DateTime" Name="Date" Precision="3" />
+          <Property Type="Int32" Name="ApplicationId" />
+          <NavigationProperty Name="Application" Relationship="AkilliBaretCmsModel.FK_Login_Application" FromRole="Login" ToRole="Application" />
+          <NavigationProperty Name="User" Relationship="AkilliBaretCmsModel.FK_Login_User" FromRole="Login" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CustomerId" />
+          <Property Type="Int32" Name="ConnectionId" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Authorization" Relationship="AkilliBaretCmsModel.FK_Authorization_User" FromRole="User" ToRole="Authorization" />
+          <NavigationProperty Name="Connection" Relationship="AkilliBaretCmsModel.FK_User_Connection" FromRole="User" ToRole="Connection" />
+          <NavigationProperty Name="Customer" Relationship="AkilliBaretCmsModel.FK_User_Customer" FromRole="User" ToRole="Customer" />
+          <NavigationProperty Name="Login" Relationship="AkilliBaretCmsModel.FK_Login_User" FromRole="User" ToRole="Login" />
+        </EntityType>
+        <Association Name="FK_Login_Application">
+          <End Type="AkilliBaretCmsModel.Application" Role="Application" Multiplicity="0..1" />
+          <End Type="AkilliBaretCmsModel.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Authorization_User">
+          <End Type="AkilliBaretCmsModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="AkilliBaretCmsModel.Authorization" Role="Authorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Authorization">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_City">
+          <End Type="AkilliBaretCmsModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="AkilliBaretCmsModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Connection_Customer">
+          <End Type="AkilliBaretCmsModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="AkilliBaretCmsModel.Connection" Role="Connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Connection">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Connection">
+          <End Type="AkilliBaretCmsModel.Connection" Role="Connection" Multiplicity="0..1" />
+          <End Type="AkilliBaretCmsModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Connection">
+              <PropertyRef Name="ConnectionId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ConnectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Customer">
+          <End Type="AkilliBaretCmsModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="AkilliBaretCmsModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_User">
+          <End Type="AkilliBaretCmsModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="AkilliBaretCmsModel.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AkilliBaretCmsModelStoreContainer" CdmEntityContainer="AkilliBaretCmsEntities" >
+          <EntitySetMapping Name="Application">
+            <EntityTypeMapping TypeName="AkilliBaretCmsModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authorization">
+            <EntityTypeMapping TypeName="AkilliBaretCmsModel.Authorization">
+              <MappingFragment StoreEntitySet="Authorization">
+                <ScalarProperty Name="DeleteBaret" ColumnName="DeleteBaret" />
+                <ScalarProperty Name="UpdateBaret" ColumnName="UpdateBaret" />
+                <ScalarProperty Name="NewBaret" ColumnName="NewBaret" />
+                <ScalarProperty Name="DeleteUser" ColumnName="DeleteUser" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="NewUser" ColumnName="NewUser" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AuthorizationId" ColumnName="AuthorizationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="AkilliBaretCmsModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Connection">
+            <EntityTypeMapping TypeName="AkilliBaretCmsModel.Connection">
+              <MappingFragment StoreEntitySet="Connection">
+                <ScalarProperty Name="Catalog" ColumnName="Catalog" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ConnectionId" ColumnName="ConnectionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="AkilliBaretCmsModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="AkilliBaretCmsModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="AkilliBaretCmsModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ConnectionId" ColumnName="ConnectionId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

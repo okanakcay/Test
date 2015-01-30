@@ -1,0 +1,7 @@
+C:\Users\Okan\Documents\Visual Studio 2012\Projects\lazyloadingtest\lazyloadingtest\bin\lazyloadingtest.dll
+C:\Users\Okan\Documents\Visual Studio 2012\Projects\lazyloadingtest\lazyloadingtest\bin\lazyloadingtest.pdb
+C:\Users\Okan\Documents\Visual Studio 2012\Projects\lazyloadingtest\lazyloadingtest\bin\EntityFramework.dll
+C:\Users\Okan\Documents\Visual Studio 2012\Projects\lazyloadingtest\lazyloadingtest\bin\EntityFramework.xml
+C:\Users\Okan\Documents\Visual Studio 2012\Projects\lazyloadingtest\lazyloadingtest\obj\Debug\lazyloadingtest.csprojResolveAssemblyReference.cache
+C:\Users\Okan\Documents\Visual Studio 2012\Projects\lazyloadingtest\lazyloadingtest\obj\Debug\lazyloadingtest.dll
+C:\Users\Okan\Documents\Visual Studio 2012\Projects\lazyloadingtest\lazyloadingtest\obj\Debug\lazyloadingtest.pdb
